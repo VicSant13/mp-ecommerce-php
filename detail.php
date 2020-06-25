@@ -13,9 +13,6 @@ $item = new MercadoPago\Item();
 $payer = new MercadoPago\Payer();
 $payment = new MercadoPago\PaymentMethod();
 
-
-
-
 $payer->name = "Lalo";
   $payer->surname = "Landa";
   $payer->email = "test_user_58295862@testuser.com";
@@ -34,7 +31,7 @@ $item->title = $_POST['title'];
 $item->quantity = 1;
 $item->unit_price = $_POST['price'];
 $item->description = 'Dispositivo móvil de Tienda e-commerce';
-$item->picture_url = $_POST['img'];
+$item->picture_url = 'https://vicsant13-mp-ecommerce-php.herokuapp.com'.str_replace('./','/',$_POST['img']);
 $preference->external_reference = 'isai@raldoo.com';
 $preference->items = array($item);
 $preference->payer = $payer;
@@ -51,13 +48,8 @@ $preference->payment_methods = array(
 
 $preference->back_urls = ['success' => 'http://mitienda.xyz/success.php','pending'=> 'http://mitienda.xyz/pending.php','failure' => 'http://mitienda.xyz/failure.php'];
 $preference->auto_return = 'approved';
-$preference->notification_url = 'http://mitienda.xyz/notificationManager.php';
-//$preference->collector_id = 592190948;
+$preference->notification_url = 'https://api.terceros-ssn.xyz/notificationManager';
 $preference->save();
-
-//var_dump($preference);
-//header("Location:".$preference->init_point);
-
 ?>
 <!DOCTYPE html>
 <html class="supports-animation supports-columns svg no-touch no-ie no-oldie no-ios supports-backdrop-filter as-mouseuser" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -194,7 +186,7 @@ $preference->save();
                                     </div>
                                     <!--<button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>-->
                                     <form action="<?php echo $preference->init_point; ?>" method="POST">
-                                        <button style="background-color:#009EE3;color:white;"type="submit">Pagar la compra</button>
+                                        <button style="background-color:#009EE3;color:white;font-size:20px;"type="submit">Pagar la compra</button>
                                     </form>
                                    
                                 </div>
