@@ -2,6 +2,7 @@
 // SDK de Mercado Pago
 require __DIR__ .  '/vendor/autoload.php';
 
+$baseUrl = 'https://vicsant13-mp-ecommerce-php.herokuapp.com';
 // Agrega credenciales
 MercadoPago\SDK::setAccessToken('APP_USR-8058997674329963-062418-89271e2424bb1955bc05b1d7dd0977a8-592190948');
 MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
@@ -31,7 +32,7 @@ $item->title = $_POST['title'];
 $item->quantity = 1;
 $item->unit_price = $_POST['price'];
 $item->description = 'Dispositivo móvil de Tienda e-commerce';
-$item->picture_url = 'https://vicsant13-mp-ecommerce-php.herokuapp.com'.str_replace('./','/',$_POST['img']);
+$item->picture_url = $baseUrl.str_replace('./','/',$_POST['img']);
 $preference->external_reference = 'isai@raldoo.com';
 $preference->items = array($item);
 $preference->payer = $payer;
@@ -46,7 +47,7 @@ $preference->payment_methods = array(
                                     "installments" => 6
                                 );
 
-$preference->back_urls = ['success' => 'http://mitienda.xyz/success.php','pending'=> 'http://mitienda.xyz/pending.php','failure' => 'http://mitienda.xyz/failure.php'];
+$preference->back_urls = ['success' => $baseUrl.'/success.php','pending'=> $baseUrl.'/pending.php','failure' => $baseUrl.'/failure.php'];
 $preference->auto_return = 'approved';
 $preference->notification_url = 'https://api.terceros-ssn.xyz/notificationManager';
 $preference->save();
