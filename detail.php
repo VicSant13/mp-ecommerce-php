@@ -49,7 +49,10 @@ $preference->payment_methods = array(
                                     "installments" => 6
                                 );
 
-$preference->back_urls = ['success' => 'success.php','pending'=> 'pending.php','failure' => 'failure.php'];
+$preference->back_urls = ['success' => 'http://mitienda.xyz/success.php','pending'=> 'http://mitienda.xyz/pending.php','failure' => 'http://mitienda.xyz/failure.php'];
+$preference->auto_return = 'approved';
+$preference->notification_url = 'http://mitienda.xyz/notificationManager.php';
+//$preference->collector_id = 592190948;
 $preference->save();
 
 //var_dump($preference);
@@ -190,13 +193,10 @@ $preference->save();
                                         </h3>
                                     </div>
                                     <!--<button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>-->
-                                    <form action="/procesar-pago" method="POST">
-                                        <script
-                                        src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
-                                        data-preference-id="<?php echo $preference->id; ?>" data-button-label="Pagar la compra">
-                                        </script>
+                                    <form action="<?php echo $preference->init_point; ?>" method="POST">
+                                        <button style="background-color:#009EE3;color:white;"type="submit">Pagar la compra</button>
                                     </form>
-                                    <a href="<?php echo $preference->init_point; ?>">Pagar con Mercado Pago</a>
+                                   
                                 </div>
                             </div>
                         </div>
